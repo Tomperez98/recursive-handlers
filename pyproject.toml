@@ -11,6 +11,11 @@ dependencies = [
 readme = "README.md"
 requires-python = ">= 3.10"
 
+[project.urls]
+Documentation = "https://github.com/Tomperez98/recursive-handlers#readme"
+Issues = "https://github.com/Tomperez98/recursive-handlers/issues"
+Source = "https://github.com/Tomperez98/recursive-handlers"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
@@ -21,10 +26,12 @@ dev-dependencies = [
     "pytest>=8.2.0",
     "mypy>=1.10.0",
     "pytest-asyncio>=0.23.6",
+    "toml>=0.10.2",
 ]
 
 [tool.rye.scripts]
 check-types = "dmypy run --timeout 60 -- src tests"
+new-release = "python scripts/new-release.py"
 
 [tool.hatch.metadata]
 allow-direct-references = true

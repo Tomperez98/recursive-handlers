@@ -24,6 +24,7 @@ pytest==8.2.0
 pytest-asyncio==0.23.6
 result==0.16.1
     # via recursive-handlers
+toml==0.10.2
 tomli==2.0.1
     # via mypy
     # via pytest
