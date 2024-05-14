@@ -31,8 +31,10 @@ DomErr = TypeVar("DomErr", bound=DomainError)
 
 
 async def run_and_collect_events(
-    handler: Callable[[list[DomainEvent], In], Result[Out, DomErr]]
-    | Callable[[list[DomainEvent], In], Coroutine[Any, Any, Result[Out, DomErr]]],
+    handler: Callable[
+        [list[DomainEvent], In],
+        Result[Out, DomErr] | Coroutine[Any, Any, Result[Out, DomErr]],
+    ],
     params: In,
 ) -> Result[tuple[list[DomainEvent], Out], DomErr]:
     domain_events: list[DomainEvent] = []
