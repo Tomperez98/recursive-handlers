@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import asyncio
 from collections.abc import Coroutine
 from typing import Any, Callable, TypeVar
 from typing_extensions import assert_never
@@ -30,7 +31,7 @@ class DomainError(Exception): ...
 DomErr = TypeVar("DomErr", bound=DomainError)
 
 
-async def run_and_collect_events(
+async def run(
     handler: Callable[
         [list[DomainEvent], In],
         Result[Out, DomErr] | Coroutine[Any, Any, Result[Out, DomErr]],
@@ -52,3 +53,10 @@ async def run_and_collect_events(
             return Ok((domain_events, output))
         case _:
             assert_never(handler_result)
+
+
+async def publish_events(domain_events: list[DomainEvent]) -> None:
+    """Publish events"""
+    await asyncio.gather(
+        *(event.publish() for event in domain_events), return_exceptions=False
+    )
