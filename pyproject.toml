@@ -1,0 +1,41 @@
+[project]
+name = "recursive-handlers"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Tomperez98", email = "tomasperezalvarez@gmail.com" }
+]
+dependencies = [
+    "result>=0.16.1",
+]
+readme = "README.md"
+requires-python = ">= 3.10"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pytest>=8.2.0",
+    "mypy>=1.10.0",
+    "pytest-asyncio>=0.23.6",
+]
+
+[tool.rye.scripts]
+check-types = "dmypy run --timeout 60 -- src tests"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/recursive_handlers"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+xfail_strict = true
+asyncio_mode = "auto"
+
+[tool.mypy]
+mypy_path = "src"
